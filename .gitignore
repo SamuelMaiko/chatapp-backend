@@ -1,0 +1,8 @@
+# Ignore the default Django SQLite database
+db.sqlite3
+
+# Ignore the .env file
+.env
+
+# Ignore the myenv virtual environment
+myenv/
