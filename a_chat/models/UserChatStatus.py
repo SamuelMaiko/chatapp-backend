@@ -21,4 +21,4 @@ class UserChatStatus(BaseModel):
         unique_together = ("user", "chat")
 
     def __str__(self):
-        return f"Status of {self.user.username} in chat {self.chat.id} with {self.chat.participant1.username}-{self.chat.participant2.username}"
+        return f"Status of {self.user.first_name} in chat {self.chat.id} with {self.chat.participant1.first_name}-{self.chat.participant2.first_name}"

@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 import environ
 from pathlib import Path
@@ -33,10 +34,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 
     'apis',
     'a_users',
-    'a_chat'
+    'a_chat',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +119,27 @@ MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "a_users.CustomUser"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+GRAPHENE = {
+    'SCHEMA': 'apis.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=15),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=30),
+
+    # optional
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+
+}

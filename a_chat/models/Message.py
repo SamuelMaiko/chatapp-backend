@@ -18,4 +18,4 @@ class Message(BaseModel):
         db_table = 'messages'
 
     def __str__(self):
-        return f"Message from {self.sender.username} in chat {self.chat.id}"
+        return f"Message from {self.sender.first_name} in chat {self.chat.id}"

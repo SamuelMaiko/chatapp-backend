@@ -1,0 +1,1 @@
+from .auth_decorators import authentication_required
